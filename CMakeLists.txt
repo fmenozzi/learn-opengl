@@ -46,3 +46,7 @@ add_definitions(-DGLFW_INCLUDE_NONE -DPROJECT_SOURCE_DIR=\"${PROJECT_SOURCE_DIR}
 # Getting Started - Hello Window
 add_executable(hello-window src/getting-started/hello-window.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
 target_link_libraries(hello-window glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
+
+# Getting Started - Hello Triangle
+add_executable(hello-triangle src/getting-started/hello-triangle.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
+target_link_libraries(hello-triangle glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
