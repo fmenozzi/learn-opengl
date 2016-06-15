@@ -10,6 +10,10 @@ void Shader::bind(GLint location, GLfloat value) {
     glUniform1f(location, value);
 }
 
+void Shader::bind(GLint location, GLint value) {
+    glUniform1i(location, value);
+}
+
 void Shader::bind(GLint location, const glm::vec4& vec) {
     glUniform4fv(location, 1, glm::value_ptr(vec));
 }
@@ -32,7 +36,7 @@ Shader& Shader::attachFromFile(const std::string& filename) {
         return *this;
     }
 
-    auto fullpath = std::string(PROJECT_SOURCE_DIR "/shaders/") + filename;
+    auto fullpath = std::string(PROJECT_ROOT "/shaders/") + filename;
 
     std::ifstream fd(fullpath);
 

@@ -41,7 +41,8 @@ source_group("Shaders" FILES ${SHADERS})
 source_group("Sources" FILES ${SOURCES})
 source_group("Vendors" FILES ${})
 
-add_definitions(-DGLFW_INCLUDE_NONE -DPROJECT_SOURCE_DIR=\"${PROJECT_SOURCE_DIR}\")
+add_definitions(-DGLFW_INCLUDE_NONE)
+add_definitions(-DPROJECT_ROOT=\"${PROJECT_SOURCE_DIR}\")
 
 # Getting Started - Hello Window
 add_executable(01-hello-window src/01-getting-started/01-hello-window.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
@@ -54,3 +55,7 @@ target_link_libraries(02-hello-triangle glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES}
 # Getting Started - Shaders
 add_executable(03-shaders src/01-getting-started/03-shaders.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
 target_link_libraries(03-shaders glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
+
+# Getting Started - Texture
+add_executable(04-textures src/01-getting-started/04-textures.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
+target_link_libraries(04-textures glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})

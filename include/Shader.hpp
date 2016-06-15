@@ -19,6 +19,7 @@ private:
     Shader& operator=(const Shader&) = delete;
 
     void bind(GLint location, GLfloat value);
+    void bind(GLint location, GLint value);
     void bind(GLint location, const glm::vec4& vec);
     void bind(GLint location, const glm::mat4& mat);
 
