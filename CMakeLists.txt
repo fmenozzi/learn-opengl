@@ -32,9 +32,9 @@ file(GLOB SHADERS shaders/*.comp
                   shaders/*.geom
                   shaders/*.vert)
 file(GLOB CONFIGS CMakeLists.txt
-                          README.md
-                         .gitignore
-                         .gitmodules)
+                  README.md
+                  .gitignore
+                  .gitmodules)
 
 source_group("Headers" FILES ${HEADERS})
 source_group("Shaders" FILES ${SHADERS})
@@ -50,3 +50,7 @@ target_link_libraries(01-hello-window glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
 # Getting Started - Hello Triangle
 add_executable(02-hello-triangle src/01-getting-started/02-hello-triangle.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
 target_link_libraries(02-hello-triangle glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
+
+# Getting Started - Shaders
+add_executable(03-shaders src/01-getting-started/03-shaders.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
+target_link_libraries(03-shaders glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
