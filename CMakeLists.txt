@@ -59,3 +59,7 @@ target_link_libraries(03-shaders glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
 # Getting Started - Texture
 add_executable(04-textures src/01-getting-started/04-textures.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
 target_link_libraries(04-textures glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
+
+# Getting Started -Transformations
+add_executable(05-transformations src/01-getting-started/05-transformations.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
+target_link_libraries(05-transformations glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
