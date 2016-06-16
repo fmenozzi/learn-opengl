@@ -63,3 +63,7 @@ target_link_libraries(04-textures glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
 # Getting Started -Transformations
 add_executable(05-transformations src/01-getting-started/05-transformations.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
 target_link_libraries(05-transformations glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
+
+# Getting Started - Coordinate Systems
+add_executable(06-coordinate-systems src/01-getting-started/06-coordinate-systems.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
+target_link_libraries(06-coordinate-systems glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})

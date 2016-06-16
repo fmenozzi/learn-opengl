@@ -37,7 +37,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    auto window = glfwCreateWindow(800, 600, "Getting Started - Textures", nullptr, nullptr);
+    auto window = glfwCreateWindow(WIDTH, HEIGHT, "Getting Started - Textures", nullptr, nullptr);
     if (!window) {
         fprintf(stderr, "Failed to create GLFW window\n");
         cleanup(EXIT_FAILURE);
@@ -121,16 +121,16 @@ int main() {
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
-        glClearColor(0.0, 0.0, 0.0, 1.0);
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         shader.activate();
 
         texture1.bind(GL_TEXTURE0);
-        shader.bind("ourTexture1", 0);
+        shader.bind(0, "ourTexture1");
 
         texture2.bind(GL_TEXTURE1);
-        shader.bind("ourTexture2", 1);
+        shader.bind(1, "ourTexture2");
 
         glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
 

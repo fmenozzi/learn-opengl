@@ -26,7 +26,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    auto window = glfwCreateWindow(800, 600, "Getting Started - Hello Window", nullptr, nullptr);
+    auto window = glfwCreateWindow(WIDTH, HEIGHT, "Getting Started - Hello Window", nullptr, nullptr);
     if (!window) {
         fprintf(stderr, "Failed to create GLFW window\n");
         cleanup(EXIT_FAILURE);
@@ -35,7 +35,6 @@ int main() {
     glfwMakeContextCurrent(window);
 
     gladLoadGL();
-    fprintf(stdout, "OpenGL %s\n", glGetString(GL_VERSION));
 
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
@@ -46,7 +45,7 @@ int main() {
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
-        glClearColor(0.0, 0.0, 0.0, 1.0);
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glfwSwapBuffers(window);

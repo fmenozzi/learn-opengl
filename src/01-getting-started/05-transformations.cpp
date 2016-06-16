@@ -133,16 +133,16 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         texture1.bind(GL_TEXTURE0);
-        shader.bind("ourTexture1", 0);
+        shader.bind(0, "ourTexture1");
 
         texture2.bind(GL_TEXTURE1);
-        shader.bind("ourTexture2", 1);
+        shader.bind(1, "ourTexture2");
 
         glm::mat4 transform;
         transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
         transform = glm::rotate(transform, (GLfloat)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
 
-        shader.bind("transform", transform);
+        shader.bind(transform, "transform");
         shader.activate();
 
         glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);

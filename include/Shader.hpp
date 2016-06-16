@@ -31,7 +31,7 @@ public:
     Shader& attachFromText(GLenum type, const std::string& text);
 
     template<class T>
-    Shader& bind(const std::string& name, T&& value) {
+    Shader& bind(T&& value, const std::string& name) {
         int location = glGetUniformLocation(m_Program, name.c_str());
         if (location == -1) {
             fprintf(stderr, "Missing uniform %s\n", name.c_str());
