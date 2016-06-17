@@ -1,6 +1,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <Texture2D.hpp>
 
+#include <GLFW/glfw3.h>
+
 Texture2D& Texture2D::loadFromFile(const std::string& filename) {
     auto path = std::string(PROJECT_ROOT "/resources/") + filename;
 
@@ -14,6 +16,7 @@ Texture2D& Texture2D::loadFromFile(const std::string& filename) {
 Texture2D& Texture2D::setWrapST(GLenum swrap, GLenum twrap) {
     // TODO: Validate swrap and twrap
     glBindTexture(GL_TEXTURE_2D, m_Texture);
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, swrap);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, twrap);
 
@@ -23,14 +26,30 @@ Texture2D& Texture2D::setWrapST(GLenum swrap, GLenum twrap) {
 Texture2D& Texture2D::setMinMagFilter(GLenum min_filter, GLenum mag_filter) {
     // TODO: Validate min_filter and mag_filter
     glBindTexture(GL_TEXTURE_2D, m_Texture);
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
 
     return *this;
 }
 
+Texture2D& Texture2D::setAnisotropicFiltering() {
+    glBindTexture(GL_TEXTURE_2D, m_Texture);
+
+    if (glfwExtensionSupported("GL_EXT_texture_filter_anisotropic")) {
+        GLfloat anisotropy = 0.0f;
+        glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &anisotropy);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, anisotropy);
+    } else {
+        fprintf(stderr, "Anisotropic filtering extension unavailable\n");
+    }
+
+    return *this;
+}
+
 Texture2D& Texture2D::generateTexture() {
     glBindTexture(GL_TEXTURE_2D, m_Texture);
+
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_Width, m_Height, 0, GL_RGB, GL_UNSIGNED_BYTE, m_Image);
     glGenerateMipmap(GL_TEXTURE_2D);
 

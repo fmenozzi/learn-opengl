@@ -26,6 +26,7 @@ public:
 
     Texture2D& setWrapST(GLenum swrap, GLenum twrap);
     Texture2D& setMinMagFilter(GLenum min_filter, GLenum max_filter);
+    Texture2D& setAnisotropicFiltering();
 
     Texture2D& generateTexture();
 

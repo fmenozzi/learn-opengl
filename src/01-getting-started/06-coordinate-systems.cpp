@@ -136,6 +136,7 @@ int main() {
     texture1.loadFromFile("container.jpg")
             .setWrapST(GL_REPEAT, GL_REPEAT)
             .setMinMagFilter(GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
+            .setAnisotropicFiltering()
             .generateTexture();
 
     // Awesome face
@@ -143,6 +144,7 @@ int main() {
     texture2.loadFromFile("awesomeface.png")
             .setWrapST(GL_REPEAT, GL_REPEAT)
             .setMinMagFilter(GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
+            .setAnisotropicFiltering()
             .generateTexture();
 
     // Shaders
