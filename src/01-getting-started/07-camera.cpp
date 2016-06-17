@@ -10,6 +10,7 @@
 
 #include <Shader.hpp>
 #include <Texture2D.hpp>
+#include <Camera.hpp>
 
 #include <cstdio>
 #include <cstdlib>
@@ -23,9 +24,61 @@
 const GLuint WIDTH  = 800;
 const GLuint HEIGHT = 600;
 
-void key_callback(GLFWwindow* window, int key, int, int action, int) {
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+
+GLfloat delta_time = 0.0f;
+GLfloat last_frame = 0.0f;
+
+GLfloat xlast = 400;
+GLfloat ylast = 300;
+
+bool first_mouse = true;
+
+bool keys[1024];
+
+void keyCallback(GLFWwindow* window, int key, int, int action, int) {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
+
+    if (0 <= key && key < 1024) {
+        if (action == GLFW_PRESS) {
+            keys[key] = true;
+        } else if (action == GLFW_RELEASE) {
+            keys[key] = false;
+        }
+    }
+}
+
+void mouseCallback(GLFWwindow*, double xpos, double ypos) {
+    if (first_mouse) {
+        xlast = xpos;
+        ylast = ypos;
+
+        first_mouse = false;
+    }
+
+    GLfloat xoffset = xpos - xlast;
+    GLfloat yoffset = ylast - ypos;
+
+    xlast = xpos;
+    ylast = ypos;
+
+    camera.processMouse(xoffset, yoffset);
+}
+
+void scrollCallback(GLFWwindow*, double, double yoffset) {
+    camera.processScroll(yoffset);
+}
+
+void move() {
+    if (keys[GLFW_KEY_W])
+        camera.processKeyboard(CameraMovement::FORWARD, delta_time);
+    if (keys[GLFW_KEY_S])
+        camera.processKeyboard(CameraMovement::BACKWARD, delta_time);
+    if (keys[GLFW_KEY_A])
+        camera.processKeyboard(CameraMovement::LEFT, delta_time);
+    if (keys[GLFW_KEY_D])
+        camera.processKeyboard(CameraMovement::RIGHT, delta_time);
 }
 
 void cleanup(int status) {
@@ -43,7 +96,7 @@ int main() {
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     glfwWindowHint(GLFW_SAMPLES, 4);
 
-    auto window = glfwCreateWindow(WIDTH, HEIGHT, "Getting Started - Coordinate Systems", nullptr, nullptr);
+    auto window = glfwCreateWindow(WIDTH, HEIGHT, "Getting Started - Camera", nullptr, nullptr);
     if (!window) {
         fprintf(stderr, "Failed to create GLFW window\n");
         cleanup(EXIT_FAILURE);
@@ -60,7 +113,11 @@ int main() {
     glfwGetFramebufferSize(window, &width, &height);
     glViewport(0, 0, width, height);
 
-    glfwSetKeyCallback(window, key_callback);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+    glfwSetKeyCallback(window, keyCallback);
+    glfwSetCursorPosCallback(window, mouseCallback);
+    glfwSetScrollCallback(window, scrollCallback);
 
     GLfloat vertices[] = {
     //    x      y      z      s     t
@@ -147,8 +204,8 @@ int main() {
 
     // Shaders
     Shader shader;
-    shader.attachFromFile("01-getting-started/06-coordinate-systems.vert")
-          .attachFromFile("01-getting-started/06-coordinate-systems.frag")
+    shader.attachFromFile("01-getting-started/07-camera.vert")
+          .attachFromFile("01-getting-started/07-camera.frag")
           .link();
 
     // Position attribute
@@ -163,6 +220,11 @@ int main() {
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
+        move();
+
+        GLfloat current_frame = glfwGetTime();
+        delta_time = current_frame - last_frame;
+        last_frame = current_frame;
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -173,17 +235,12 @@ int main() {
         texture2.bind(GL_TEXTURE1);
         shader.bind(1, "ourTexture2");
 
-        glm::mat4 model;
-		model = glm::rotate(model, (GLfloat)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
-
-        glm::mat4 view;
-        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-
-        glm::mat4 proj;
-        proj = glm::perspective(glm::radians(45.0f), (GLfloat)WIDTH/HEIGHT, 0.1f, 100.0f);
+        glm::mat4 view = camera.getViewMatrix();
+        glm::mat4 proj = glm::perspective(camera.getZoom(), (GLfloat)WIDTH/HEIGHT, 0.1f, 100.0f);
 
         shader.bind(view, "view");
         shader.bind(proj, "proj");
+
         for (GLuint i = 0; i < 10; i++) {
             GLfloat time    = glfwGetTime();
             GLfloat sintime = std::sin(time);

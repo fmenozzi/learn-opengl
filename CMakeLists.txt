@@ -67,3 +67,7 @@ target_link_libraries(05-transformations glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES
 # Getting Started - Coordinate Systems
 add_executable(06-coordinate-systems src/01-getting-started/06-coordinate-systems.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
 target_link_libraries(06-coordinate-systems glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
+
+# Getting Started - Camera
+add_executable(07-camera src/01-getting-started/07-camera.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
+target_link_libraries(07-camera glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
