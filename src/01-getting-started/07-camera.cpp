@@ -192,14 +192,14 @@ int main() {
     Texture2D texture1;
     texture1.loadFromFile("container.jpg")
             .setWrapST(GL_REPEAT, GL_REPEAT)
-            .setMinMagFilter(GL_LINEAR, GL_LINEAR)
+            .setMinMagFilter(GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
             .generateTexture();
 
     // Awesome face
     Texture2D texture2;
     texture2.loadFromFile("awesomeface.png")
             .setWrapST(GL_REPEAT, GL_REPEAT)
-            .setMinMagFilter(GL_LINEAR, GL_LINEAR)
+            .setMinMagFilter(GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
             .generateTexture();
 
     // Shaders
