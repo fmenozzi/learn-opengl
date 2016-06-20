@@ -71,3 +71,7 @@ target_link_libraries(06-coordinate-systems glfw ${GLFW_LIBRARIES} ${GLAD_LIBRAR
 # Getting Started - Camera
 add_executable(07-camera src/01-getting-started/07-camera.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
 target_link_libraries(07-camera glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
+
+# Lighting - Colors
+add_executable(08-colors src/02-lighting/08-colors.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
+target_link_libraries(08-colors glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})

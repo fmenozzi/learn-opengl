@@ -143,7 +143,7 @@ int main() {
         transform = glm::rotate(transform, (GLfloat)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
 
         shader.bind(transform, "transform");
-        shader.activate();
+        shader.use();
 
         glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
 

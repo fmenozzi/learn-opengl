@@ -252,7 +252,7 @@ int main() {
             model = glm::rotate(model, time * glm::radians(20.0f), glm::vec3(1.0f, 0.3f*sintime, 0.5f));
 
             shader.bind(model, "model");
-            shader.activate();
+            shader.use();
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }

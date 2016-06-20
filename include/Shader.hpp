@@ -20,6 +20,7 @@ private:
 
     void bind(GLint location, GLfloat value);
     void bind(GLint location, GLint value);
+    void bind(GLint location, const glm::vec3& vec);
     void bind(GLint location, const glm::vec4& vec);
     void bind(GLint location, const glm::mat4& mat);
 
@@ -43,7 +44,7 @@ public:
 
     Shader& link();
 
-    Shader& activate();
+    Shader& use();
 
     GLuint get() { return m_Program; }
 };

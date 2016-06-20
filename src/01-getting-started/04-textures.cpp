@@ -124,7 +124,7 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        shader.activate();
+        shader.use();
 
         texture1.bind(GL_TEXTURE0);
         shader.bind(0, "ourTexture1");
