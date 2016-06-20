@@ -81,6 +81,10 @@ public:
     void processMouse(GLfloat xoffset, GLfloat yoffset, GLboolean constrian_pitch = true);
     void processScroll(GLfloat yoffset);
 
+    glm::vec3 getPosition() {
+        return m_Position;
+    }
+
     GLfloat getZoom() {
         return m_Zoom;
     }

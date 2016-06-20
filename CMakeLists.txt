@@ -75,3 +75,7 @@ target_link_libraries(07-camera glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
 # Lighting - Colors
 add_executable(08-colors src/02-lighting/08-colors.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
 target_link_libraries(08-colors glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
+
+# Lighting - Basic Lighting
+add_executable(09-basic-lighting src/02-lighting/09-basic-lighting.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
+target_link_libraries(09-basic-lighting glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
