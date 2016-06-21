@@ -79,3 +79,7 @@ target_link_libraries(08-colors glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
 # Lighting - Basic Lighting
 add_executable(09-basic-lighting src/02-lighting/09-basic-lighting.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
 target_link_libraries(09-basic-lighting glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
+
+# Lighting - Materials
+add_executable(10-materials src/02-lighting/10-materials.cpp ${SOURCES} ${HEADERS} ${SHADERS} ${CONFIGS} ${DEPS})
+target_link_libraries(10-materials glfw ${GLFW_LIBRARIES} ${GLAD_LIBRARIES})
